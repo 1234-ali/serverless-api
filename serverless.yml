@@ -1,0 +1,40 @@
+service: serverless-service
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  memorySize: 512
+  lambdaHashingVersion: '20200924'
+
+functions:
+  serverlessFunc:
+    handler: index.handler
+    events:
+      - httpApi:
+          path: /testdb
+          method: get
+          path: /addUser
+          method: post
+      - httpApi:
+          path: /updateUser/{id}
+          method: put
+      - httpApi:
+          path: /deleteUser/{id}
+          method: delete
+      - httpApi:
+          path: /listUsers
+          method: get
+      - httpApi:
+          path: /getUserByEmail/{email}
+          method: get
+      - httpApi:
+          path: /addStudio  
+          method: post
+      - httpApi:
+          path: /getStudioById/{id}
+          method: get
+
+plugins:
+  - serverless-offline
