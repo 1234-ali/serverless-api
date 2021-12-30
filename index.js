@@ -6,6 +6,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-require('./app/route');
+require('./app/route')(app);
 
 module.exports.handler = serverless(app);

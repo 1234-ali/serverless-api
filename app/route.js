@@ -21,6 +21,11 @@ module.exports = function(app) {
 
     app.post('/addUser', async (req, res) => {
         const { email, password } = req.body;
+        const { api_key } = req.query;
+
+        if (!api_key || api_key != process.env.API_KEY) {
+            return res.status(404).send({success: false, message:'Invalid api key!'});
+        }
 
         if (!email || !password) {
             return res.status(404).send({success: false, message:'Fields are empty!'});
@@ -71,6 +76,12 @@ module.exports = function(app) {
         const { id } = req.params;
         const { oldPassword, newPassword } = req.body;
 
+        const { api_key } = req.query;
+
+        if (!api_key || api_key != process.env.API_KEY) {
+            return res.status(404).send({success: false, message:'Invalid api key!'});
+        }
+
         if (!id || !oldPassword || !newPassword) {
             return res.status(404).send({success: false, message:'Fields are empty!'});
         }
@@ -120,6 +131,11 @@ module.exports = function(app) {
 
     app.delete('/deleteUser/:id', async (req, res) => {
         const { id } = req.params;
+        const { api_key } = req.query;
+
+        if (!api_key || api_key != process.env.API_KEY) {
+            return res.status(404).send({success: false, message:'Invalid api key!'});
+        }
 
         if (!id) {
             return res.status(404).send({success: false, message:'Fields are empty!'});
@@ -149,6 +165,12 @@ module.exports = function(app) {
     });
 
     app.get('/listUsers', async (req, res) => {
+        const { api_key } = req.query;
+
+        if (!api_key || api_key != process.env.API_KEY) {
+            return res.status(404).send({success: false, message:'Invalid api key!'});
+        }
+
         try {
             const connection = await pool.getConnection();
 
@@ -170,6 +192,12 @@ module.exports = function(app) {
 
     app.get('/getUserByEmail/:email', async (req, res) => {
         const { email } = req.params;
+        const { api_key } = req.query;
+
+        if (!api_key || api_key != process.env.API_KEY) {
+            return res.status(404).send({success: false, message:'Invalid api key!'});
+        }
+
 
         if (!email) {
             return res.status(404).send({success: false, message:'Fields are empty!'});
@@ -200,6 +228,11 @@ module.exports = function(app) {
 
     app.post('/addStudio', async (req, res) => {
         const { userId, studio } = req.body;
+        const { api_key } = req.query;
+
+        if (!api_key || api_key != process.env.API_KEY) {
+            return res.status(404).send({success: false, message:'Invalid api key!'});
+        }
 
         if (!userId || !studio) {
             return res.status(404).send({success: false, message:'Fields are empty!'});
@@ -261,6 +294,11 @@ module.exports = function(app) {
 
     app.post('/getStudioById/:id', async (req, res) => {
         const { id } = req.params;
+        const { api_key } = req.query;
+
+        if (!api_key || api_key != process.env.API_KEY) {
+            return res.status(404).send({success: false, message:'Invalid api key!'});
+        }
 
         if (!id) {
             return res.status(404).send({success: false, message:'Fields are empty!'});

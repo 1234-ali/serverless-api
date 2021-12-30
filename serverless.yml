@@ -15,6 +15,7 @@ functions:
       - httpApi:
           path: /testdb
           method: get
+      - httpApi:
           path: /addUser
           method: post
       - httpApi:
